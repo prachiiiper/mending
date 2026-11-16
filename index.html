@@ -11,6 +11,10 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mending">
 <meta name="twitter:description" content="A short, gentle pixel game for a broken heart. There's no way to lose.">
+<script>
+  window.LYTICDATA_CONFIG = { api: 'https://lyticdata.vercel.app', apiKey: 'ed8e30c317a94a8fac9a7feff0c7c57a4a12dd2e0a73eb69' };
+</script>
+<script src="https://lyticdata.vercel.app/lyticdata.js" defer></script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 13 11' shape-rendering='crispEdges'%3E%3Cpath fill='%23e0506e' d='M2 0h3v1h1v1h1V1h1V0h3v1h1v1h1v3h-1v1h-1v1h-1v1h-1v1h-1v1H7v1H6V9H5V8H4V7H3V6H2V5H1V2h1z'/%3E%3Cpath fill='%23ffd36a' d='M6 2h1v1H6zM5 3h1v1H5zM6 4h1v1H6zM7 5h1v2H7zM6 7h1v1H6zM5 8h1v1H5zM6 9h1v1H6z'/%3E%3C/svg%3E">
 <style>
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -127,6 +131,9 @@ const cv = $('game'), ctx = cv.getContext('2d');
 cv.width = W; cv.height = H; ctx.imageSmoothingEnabled = false;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const touch = matchMedia('(pointer: coarse)').matches;
+
+/* ---------- analytics (LyticData) ---------- */
+function track(name, meta){ try { if (window.LyticData && window.LyticData.track) window.LyticData.track(name, meta || {}); } catch(e){} }
 
 /* ---------- helpers ---------- */
 function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
@@ -611,15 +618,18 @@ function setHint(text, x, y){
 function loadScene(i){
   sceneIdx = i; player.x = 14; player.vx = 0; player.face = 1;
   initParticles(); bursts = []; showCard(); setRain();
+  track('scene_reached', { scene: i + 1, name: SCENES[i].name });
 }
 function begin(){
   if (mode !== 'title') return;
   initAudio(); setTimeout(chime, 120);
+  track('game_begin');
   $('start').hidden = true;
   mode = 'play'; trans = { t: 0, dir: 'in' };
   loadScene(0);
 }
 function restart(){
+  track('play_again');
   SCENES.forEach(s => s.items.forEach(it => it.collected = false));
   mended = 0; updatePips(); fin = null;
   $('end').hidden = true; mode = 'play'; trans = { t: 0, dir: 'in' };
@@ -634,6 +644,7 @@ function collect(it){
   openDialog(it.name, it.lines, () => {
     it.collected = true; mended = Math.min(TOTAL, mended + 1); updatePips();
     chime(); burst(player.x, GROUND - 7, 18);
+    track('item_mended', { item: it.name, scene: sceneIdx + 1, mended });
   });
 }
 function startFinale(){
@@ -691,7 +702,7 @@ function update(dt){
     if (Math.random() < dt*6) burst(player.x + (Math.random()*14 - 7), GROUND - 10 - Math.min(10, fin.t*3), 1);
     if (fin.t > 3.6 && !fin.talked){
       fin.talked = true;
-      openDialog('', FINAL_LINES, () => { setTimeout(() => { mode = 'end'; $('end').hidden = false; $('again').focus({preventScroll:true}); }, 1400); });
+      openDialog('', FINAL_LINES, () => { track('game_finished', { mended }); setTimeout(() => { mode = 'end'; $('end').hidden = false; $('again').focus({preventScroll:true}); }, 1400); });
     }
   }
 }
@@ -732,7 +743,7 @@ $('bact').addEventListener('pointerdown', e => { e.preventDefault(); initAudio()
 $('stage').addEventListener('pointerdown', e => { if (e.target.closest('.screen')) return; initAudio(); if (dialog) actionQueued = true; });
 $('begin').addEventListener('click', begin);
 $('again').addEventListener('click', restart);
-$('mute').addEventListener('click', () => { initAudio(); setMute(!muted); });
+$('mute').addEventListener('click', () => { initAudio(); setMute(!muted); track(muted ? 'sound_off' : 'sound_on', { scene: sceneIdx + 1 }); });
 
 /* ---------- boot ---------- */
 function start(data){
