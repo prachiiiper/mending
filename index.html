@@ -3,14 +3,79 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="A short, gentle pixel game for a broken heart. Walk through rain, an empty room and an old park, find small kind things, and mend the crack with gold. There's no way to lose.">
+<title>Mending: a gentle pixel game for a broken heart</title>
+<meta name="description" content="A free, ten-minute pixel game for a broken heart. Walk through rain, an empty room and an old park, find small kind things, and mend the crack with gold. No way to lose. Plays in your browser.">
+<link rel="canonical" href="https://mending.byteyourweb.com/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="byteyourweb">
 <meta name="theme-color" content="#0d0b1a">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Mending">
-<meta property="og:description" content="A short, gentle pixel game for a broken heart. There's no way to lose.">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mending">
-<meta name="twitter:description" content="A short, gentle pixel game for a broken heart. There's no way to lose.">
+<meta property="og:site_name" content="Mending">
+<meta property="og:url" content="https://mending.byteyourweb.com/">
+<meta property="og:title" content="Mending: a gentle pixel game for a broken heart">
+<meta property="og:description" content="A free, ten-minute pixel game for a broken heart. Find small kind things and mend the crack with gold. There's no way to lose.">
+<meta property="og:image" content="https://mending.byteyourweb.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A pixel-art heart with a crack mended in gold, next to the word Mending.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mending: a gentle pixel game for a broken heart">
+<meta name="twitter:description" content="A free, ten-minute pixel game for a broken heart. There's no way to lose.">
+<meta name="twitter:image" content="https://mending.byteyourweb.com/og-image.png">
+<meta name="twitter:image:alt" content="A pixel-art heart with a crack mended in gold, next to the word Mending.">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://mending.byteyourweb.com/#website",
+      "url": "https://mending.byteyourweb.com/",
+      "name": "Mending",
+      "publisher": { "@id": "https://byteyourweb.com/#org" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://byteyourweb.com/#org",
+      "name": "byteyourweb",
+      "url": "https://byteyourweb.com"
+    },
+    {
+      "@type": ["VideoGame", "WebApplication"],
+      "@id": "https://mending.byteyourweb.com/#game",
+      "name": "Mending",
+      "url": "https://mending.byteyourweb.com/",
+      "description": "A short, gentle pixel game for a broken heart. A small cracked heart walks through six quiet scenes, finds small kind things, and each one mends part of the crack with gold, like kintsugi. There's no way to lose.",
+      "image": "https://mending.byteyourweb.com/og-image.png",
+      "genre": ["Cozy game", "Narrative game", "Pixel art", "Walking simulator"],
+      "keywords": "heartbreak game, breakup game, cozy game, pixel art game, kintsugi, comfort game, free browser game",
+      "gamePlatform": ["Web browser", "Mobile web"],
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "Any",
+      "playMode": "SinglePlayer",
+      "numberOfPlayers": { "@type": "QuantitativeValue", "value": 1 },
+      "timeRequired": "PT10M",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@id": "https://byteyourweb.com/#org" },
+      "publisher": { "@id": "https://byteyourweb.com/#org" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Is Mending free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Mending is free and plays in your web browser on desktop and phone. There's nothing to download or sign up for." } },
+        { "@type": "Question", "name": "How long does Mending take to play?", "acceptedAnswer": { "@type": "Answer", "text": "About ten minutes, across six short scenes." } },
+        { "@type": "Question", "name": "Can you lose in Mending?", "acceptedAnswer": { "@type": "Answer", "text": "No. There are no enemies, timers or fail states. You walk at your own pace and look at things." } },
+        { "@type": "Question", "name": "What is kintsugi?", "acceptedAnswer": { "@type": "Answer", "text": "Kintsugi is the Japanese art of repairing broken pottery with gold, so the cracks become part of its story instead of something to hide. In Mending, each kind thing you find fills part of the heart's crack with gold." } }
+      ]
+    }
+  ]
+}
+</script>
 <script>
   window.LYTICDATA_CONFIG = { api: 'https://lyticdata.vercel.app', apiKey: 'ed8e30c317a94a8fac9a7feff0c7c57a4a12dd2e0a73eb69' };
 </script>
@@ -24,7 +89,6 @@ img{max-width:100%}
 .credit{font-size:clamp(10px,1.4vw,12px);color:#a99cc4;margin-top:.4em}
 .credit a{color:#ffd36a}
 </style>
-<title>Mending</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,9 +153,27 @@ canvas{display:block; width:100%; height:100%; image-rendering:crisp-edges; imag
 .pad button.held{background:var(--line)}
 .pad .look{background:var(--rose); color:var(--ink); border-color:var(--rose); min-width:100px; font-size:17px}
 @media (pointer:coarse){ .pad{display:flex} .keys{display:none} }
+
+/* Game fills the first screen; the about text sits below it for readers and search engines. */
+body{justify-content:flex-start}
+.hero{width:100%; min-height:calc(100vh - 32px); display:flex; flex-direction:column; align-items:center; justify-content:center}
+@supports (height:100dvh){ .hero{min-height:calc(100dvh - 32px)} }
+.more-link{color:var(--muted); font-size:13px; text-decoration:none; margin-top:14px; opacity:.8}
+.more-link:hover{color:var(--gold)}
+.about{width:min(100%, 680px); margin:56px auto 24px; line-height:1.6; font-size:16px; color:var(--text)}
+.about h2{font-family:var(--font-display); font-weight:600; color:var(--gold); font-size:24px; margin:1.8em 0 .5em}
+.about h2:first-child{margin-top:0}
+.about h3{font-size:17px; color:var(--rose); margin:1.2em 0 .2em; font-weight:600}
+.about p, .about li{color:var(--text); opacity:.9}
+.about ol, .about ul{padding-left:1.3em}
+.about li{margin:.3em 0}
+.about strong{color:var(--rose); font-weight:600}
+.about a{color:var(--gold)}
+.about footer{margin-top:2.5em; padding-top:1em; border-top:1px solid var(--line); color:var(--muted); font-size:14px}
 @media (prefers-reduced-motion:reduce){ .card{transition:none} .dialog .more{animation:none} }
 </style>
 
+<div class="hero">
 <main class="wrap">
   <div class="stage" id="stage">
     <canvas id="game" aria-label="Mending, a pixel game. A small cracked heart walks through quiet scenes."></canvas>
@@ -122,6 +204,46 @@ canvas{display:block; width:100%; height:100%; image-rendering:crisp-edges; imag
     <button class="look" id="bact" type="button">Look</button>
   </div>
 </main>
+<a class="more-link" href="#about">About this game &#8595;</a>
+</div>
+
+<article class="about" id="about">
+  <h2>A gentle game for a broken heart</h2>
+  <p><strong>Mending</strong> is a free, ten-minute pixel art game about getting through a breakup, or any day when your heart hurts. You play a small cracked heart walking through six quiet scenes. Along the way you find small kind things, and each one fills part of the crack with gold.</p>
+  <p>There are no enemies, no timers, and no way to lose. You walk, you look closer, and you're done when you reach the morning.</p>
+
+  <h2>Why gold? A little about kintsugi</h2>
+  <p>Kintsugi is the Japanese art of repairing broken pottery with gold. The cracks aren't hidden. They become the most visible, most precious part of the bowl. Mending borrows that idea: the heart doesn't go back to how it was before, but it ends up whole, with gold where it broke.</p>
+
+  <h2>The six scenes</h2>
+  <ol>
+    <li><strong>Rain.</strong> It's been raining all day. Mostly on the inside.</li>
+    <li><strong>The Empty Room.</strong> Everything is where it was. That's the hard part.</li>
+    <li><strong>The Old Park.</strong> You used to come here together.</li>
+    <li><strong>Lights in Town.</strong> Other people's windows. Other people's evenings.</li>
+    <li><strong>The Hill.</strong> Almost morning.</li>
+    <li><strong>Sunrise.</strong> Keep walking.</li>
+  </ol>
+
+  <h2>How to play</h2>
+  <ul>
+    <li><strong>Keyboard:</strong> &#8592; &#8594; or A / D to walk. Space or E to look closer and continue.</li>
+    <li><strong>Phone or tablet:</strong> use the on-screen arrow buttons and the Look button.</li>
+    <li>Sound helps. There's a mute button under the game if you need quiet.</li>
+  </ul>
+
+  <h2>Questions</h2>
+  <h3>Is Mending free?</h3>
+  <p>Yes. It's free and plays in your web browser on desktop and phone. There's nothing to download or sign up for.</p>
+  <h3>How long does it take?</h3>
+  <p>About ten minutes, across six short scenes.</p>
+  <h3>Can you lose?</h3>
+  <p>No. There are no fail states. Go at whatever pace you need.</p>
+  <h3>Who is it for?</h3>
+  <p>Anyone going through a breakup, a loss, or just a heavy day. It's meant to be a soft place to sit for a few minutes. It isn't a substitute for talking to someone. If you're struggling, please reach out to a friend or a local support line.</p>
+
+  <footer>Made with care by <a href="https://byteyourweb.com" rel="noopener">byteyourweb</a>. <a href="#stage">Back to the game &#8593;</a></footer>
+</article>
 
 <script>
 (() => {
@@ -717,6 +839,7 @@ function frame(now){
 /* ---------- input ---------- */
 const LEFT = new Set(['ArrowLeft','a','A']), RIGHT = new Set(['ArrowRight','d','D']), ACT = new Set([' ','Enter','e','E','ArrowUp','w','W']);
 addEventListener('keydown', e => {
+  if (e.target && e.target.closest && e.target.closest('a, .about')) return;
   if (e.target && e.target.tagName === 'BUTTON' && (e.key === ' ' || e.key === 'Enter') && mode !== 'play' && mode !== 'finale') return;
   initAudio();
   if (LEFT.has(e.key)){ keys.left = true; e.preventDefault(); }
